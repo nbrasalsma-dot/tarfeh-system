@@ -5,12 +5,14 @@ import { NextResponse } from "next/server";
 // 1. جلب كافة المنتجات في المخزن
 export async function GET() {
   const session = await auth();
-  if (!session?.user?.tenantId)
+  const tenantId = (session?.user as any)?.tenantId; // 👈 التعديل الجراحي
+
+  if (!tenantId)
     return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
 
   try {
     const products = await prisma.productInventory.findMany({
-      where: { tenantId: session.user.tenantId },
+      where: { tenantId: tenantId }, // 👈 التعديل الجراحي
       orderBy: { createdAt: "desc" },
     });
     return NextResponse.json(products);
@@ -22,7 +24,9 @@ export async function GET() {
 // 2. إضافة منتج جديد للمستودع
 export async function POST(req: Request) {
   const session = await auth();
-  if (!session?.user?.tenantId)
+  const tenantId = (session?.user as any)?.tenantId; // 👈 التعديل الجراحي
+
+  if (!tenantId)
     return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
 
   try {
@@ -54,7 +58,7 @@ export async function POST(req: Request) {
         minQuantity: parseInt(minQuantity) || 5,
         supplierName: supplierName || null,
         alertOnExpiry: false,
-        tenantId: session.user.tenantId,
+        tenantId: tenantId, // 👈 التعديل الجراحي
       },
     });
 

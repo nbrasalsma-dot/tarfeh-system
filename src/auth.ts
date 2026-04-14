@@ -56,7 +56,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           name: user.name,
           email: user.email,
           role: user.role,
-          tenantId: user.tenantId,
+          tenantId: user.tenantId || undefined, // ✅ تحويل null إلى undefined
         };
       },
     }),

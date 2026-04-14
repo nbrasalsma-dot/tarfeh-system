@@ -628,7 +628,7 @@ export default function MerchantsPage() {
   const [isCommissionModalOpen, setIsCommissionModalOpen] = useState(false);
   const [isStatementModalOpen, setIsStatementModalOpen] = useState(false);
   const [selectedSupplier, setSelectedSupplier] = useState<any>(null);
-  const [supplierTransactions, setSupplierTransactions] = useState([]);
+  const [supplierTransactions, setSupplierTransactions] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [formData, setFormData] = useState({

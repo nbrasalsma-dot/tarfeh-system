@@ -156,14 +156,15 @@ export async function PUT(request: Request) {
 
     // تحديث الموظف
     // التعديل الجراحي في دالة التعديل (PUT)
+    // تحديث الموظف
     const updatedUser = await prisma.user.update({
-      where: { id: id }, // ✅ تم التصحيح: استخدام id بدلاً من userId
+      where: { id: id },
       data: {
         name: name || existingUser.name,
         email: email || existingUser.email,
-        phone: phone !== undefined ? phone : existingUser.phone, // ✅ تمت إضافة تحديث الهاتف
-        role: userRole === "ADMIN" ? "ADMIN" : "EMPLOYEE",
-        accountingRole: userRole,
+        phone: phone !== undefined ? phone : existingUser.phone,
+        role: userRole === "ADMIN" ? "ADMIN" : "CUSTOMER", // ✅ تم التصحيح: CUSTOMER بدلاً من EMPLOYEE
+        accountingRole: userRole, // هذا الحقل خاص بالنظام المحاسبي ويقبل EMPLOYEE
         isActive:
           status === "نشط"
             ? true

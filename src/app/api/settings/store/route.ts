@@ -75,6 +75,7 @@ export async function POST(request: Request) {
       // إنشاء بيانات جديدة (Create)
       const newConfig = await prisma.systemConfig.create({
         data: {
+          storeName: body.storeNameAr || "متجر ترفة", // 👈 هذا هو الحقل الناقص
           storeNameAr: body.storeNameAr,
           storeNameEn: body.storeNameEn,
           commercialRegister: body.commercialRegister,

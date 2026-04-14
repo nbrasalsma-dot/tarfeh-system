@@ -44,7 +44,7 @@ export async function POST(req: Request) {
           merchantName: customerName || "عميل نقدي",
           description: `بيع أصناف عدد (${items.length}) عبر نقطة البيع`,
           tenantId: session.user.tenantId,
-        },
+        } as any,
       });
 
       return newTransaction;

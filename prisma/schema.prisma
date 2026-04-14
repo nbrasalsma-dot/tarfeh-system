@@ -83,6 +83,8 @@ model Merchant {
   // Relations
   user              User     @relation(fields: [userId], references: [id])
   products          Product[]
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
   
   @@map("merchants")
 }
@@ -99,6 +101,9 @@ model Category {
   updatedAt   DateTime @updatedAt
 
   products    Product[]
+
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
 
   @@map("categories")
 }
@@ -145,7 +150,8 @@ model Product {
   orderItems  OrderItem[]
   reviews     Review[]
   inventory ProductInventory? // ربط المنتج بسجله المحاسبي
-
+  tenantId  String?  // 👈 أضفه هنا
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id]) // ربط بالمتجر
   @@map("products")
 }
 
@@ -197,6 +203,9 @@ model Order {
   agent         User?       @relation("AgentOrders", fields: [agentId], references: [id], onDelete: SetNull)
   governorateRel Governorate? @relation(fields: [governorateId], references: [id])
   items         OrderItem[]
+
+  tenantId  String?
+  tenant    Tenant?  @relation(fields: [tenantId], references: [id])
 
   @@map("orders")
 }
@@ -438,7 +447,11 @@ model Tenant {
   // العلاقات العكسية (كل ما يملكه هذا المتجر)
   users               User[]
   suppliers           Supplier[]
-  products            ProductInventory[]
+  productsInventory   ProductInventory[] // غيرنا الاسم لتمييزه عن منتجات المتجر
+  storeProducts       Product[]          // 👈 جديد: منتجات المتجر
+  categories          Category[]         // 👈 جديد: تصنيفات المتجر
+  orders              Order[]            // 👈 جديد: طلبات المتجر
+  merchants           Merchant[]         // 👈 جديد: التجار المرتبطين
   expenses            Expense[]
   transactions        Transaction[]
   merchantCommissions MerchantCommission[]

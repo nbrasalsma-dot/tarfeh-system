@@ -3,6 +3,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma";
 import * as bcrypt from "bcrypt";
 import "dotenv/config";
+
 // إعداد المحول يدوياً للمرة الأخيرة في ملف البذرة
 const connectionString = process.env.DATABASE_URL as string;
 const pool = new Pool({ connectionString });
@@ -10,9 +11,13 @@ const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-  const hashedPassword = await bcrypt.hash("admin123", 10);
+  // التعديل الجراحي: كلمة المرور الجديدة والقوية
+  const hashedPassword = await bcrypt.hash(
+    "Tarifa.store.yetarifa.store.ye777",
+    10,
+  );
 
-  console.log("⏳ جاري صب القواعد وتعميد الملك...");
+  console.log("⏳ جاري صب القواعد وتعميد الملك بالبيانات السيادية الجديدة...");
 
   // 1. إنشاء المتجر الرئيسي (شركة ترفة)
   const tenant = await prisma.tenant.upsert({
@@ -25,22 +30,23 @@ async function main() {
     },
   });
 
-  // 2. إنشاء حسابك كملك للنظام (Super Admin)
+  // 2. إنشاء حسابك كملك للنظام (Super Admin) بالبريد الجديد
   await prisma.user.upsert({
-    where: { email: "admin@tarfeh.com" },
+    where: { email: "nbrask711@gmail.com" }, // 👈 البريد الجديد هنا
     update: {},
     create: {
-      email: "admin@tarfeh.com",
+      email: "nbrask711@gmail.com", // 👈 والبريد الجديد هنا
       name: "المدير العام",
       password: hashedPassword,
-      phone: "777777777", // 👈 الإضافة الجراحية هنا
+      phone: "777777777",
       role: "ADMIN",
       accountingRole: "SUPER_ADMIN",
       tenantId: tenant.id,
     },
   });
 
-  console.log("✅ تمت زراعة الملك بنجاح! يمكنك الآن تجربة الدخول.");
+  console.log("✅ تمت زراعة الملك بنجاح! الإيميل: nbrask711@gmail.com");
+  console.log("✅ يمكنك الآن تجربة الدخول بالباسورد الجديد فور انتهاء الرفع.");
 }
 
 main()

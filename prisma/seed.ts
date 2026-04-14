@@ -33,7 +33,8 @@ async function main() {
       email: "admin@tarfeh.com",
       name: "المدير العام",
       password: hashedPassword,
-      role: "SUPER_ADMIN",
+      role: "ADMIN",
+      accountingRole: "SUPER_ADMIN",
       tenantId: tenant.id,
     },
   });

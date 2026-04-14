@@ -1,21 +1,41 @@
+/* globals.css - ضع هذا الملف في مجلد styles أو app */
 @import "tailwindcss";
-
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* ألوان متجر ترفة الفاخرة */
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-tarfeh-cream: var(--tarfeh-cream);
+  --color-tarfeh-warm: var(--tarfeh-warm);
+}
+
+:root {
+  /* ألوان متجر ترفة (الفاتح) - بدون أي أسود أو كحلي */
+  --background: #fdf8f2;
+  --foreground: #3d2e1f;
+
+  --gold: #c9a962;
+  --gold-light: #f0e4c8;
+  --gold-dark: #a8883e;
+  --tarfeh-cream: #faf3e8;
+  --tarfeh-warm: #e8d9c5;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* ألوان متجر ترفة (الداكن) - مع الحفاظ على الطابع الدافئ */
+    --background: #1a1612;
+    --foreground: #f5ebe0;
+
+    --gold: #d4b36a;
+    --gold-light: #f0e4c8;
+    --gold-dark: #b8943e;
+    --tarfeh-cream: #2a241e;
+    --tarfeh-warm: #3d3428;
   }
 }
 
@@ -23,4 +43,23 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* تنسيقات إضافية مستوحاة من المتجر */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--tarfeh-warm);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--gold);
+  border-radius: 3px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
 }

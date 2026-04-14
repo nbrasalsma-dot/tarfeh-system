@@ -33,6 +33,7 @@ async function main() {
       email: "admin@tarfeh.com",
       name: "المدير العام",
       password: hashedPassword,
+      phone: "777777777", // 👈 الإضافة الجراحية هنا
       role: "ADMIN",
       accountingRole: "SUPER_ADMIN",
       tenantId: tenant.id,

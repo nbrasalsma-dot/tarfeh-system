@@ -1,7 +1,7 @@
 import { Pool } from "pg";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma";
-import * as bcrypt from "bcrypt";
+import * as bcrypt from "bcryptjs";
 import "dotenv/config";
 
 // إعداد المحول يدوياً للمرة الأخيرة في ملف البذرة

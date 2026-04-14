@@ -53,9 +53,11 @@ async function main() {
         email: "admin@tarfeh.com",
         password: hashedPassword,
         name: "الأدمن الرئيسي",
+        phone: "777777777", // 👈 الإضافة الجراحية هنا
         role: "ADMIN",
-        tenantId: tenantId,
-        isActive: true, // التفعيل الإجباري
+        accountingRole: "SUPER_ADMIN", // تأكد من وجود هذه أيضاً
+        tenantId: tenant.id,
+        isActive: true,
       },
     });
 

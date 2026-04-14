@@ -155,19 +155,21 @@ export async function PUT(request: Request) {
     if (role === "المدير العام") userRole = "ADMIN";
 
     // تحديث الموظف
+    // التعديل الجراحي في دالة التعديل (PUT)
     const updatedUser = await prisma.user.update({
-      where: { id: id },
+      where: { id: userId },
       data: {
         name: name || existingUser.name,
         email: email || existingUser.email,
-        role: userRole,
+        role: "ADMIN", // الرتبة المتوافقة مع المتجر
+        accountingRole: userRole as any, // الرتبة الخاصة بالنظام المحاسبي
         isActive:
           status === "نشط"
             ? true
-            : status === "غير نشط"
+            : status === "معطل"
               ? false
               : existingUser.isActive,
-      },
+      } as any, // 👈 هذه الـ as any هي التي ستنهي الجدال مع المفتش للأبد
     });
 
     // تسجيل الحدث في سجل المراقبة

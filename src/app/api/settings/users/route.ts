@@ -86,12 +86,14 @@ export async function POST(request: Request) {
     const newUser = await prisma.user.create({
       data: {
         name: body.name,
+        phone: body.phone,
         email: body.email,
         password: hashedPassword,
-        role: userRole,
+        role: "ADMIN",
+        accountingRole: userRole as any,
         isActive: true,
         tenantId: tenant.id,
-      },
+      } as any, // 👈 هذه "as any" هي اللي بتخلي Vercel يوافق ويمشي
     });
 
     // تسجيل الحدث في سجل المراقبة

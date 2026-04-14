@@ -222,8 +222,8 @@ const InvoicePreviewModal = ({
 };
 
 export default function POSPage() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState<any[]>([]);
+  const [cart, setCart] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);

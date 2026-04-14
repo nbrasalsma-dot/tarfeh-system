@@ -8,7 +8,9 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
-  if (!session?.user?.tenantId)
+  const tenantId = (session?.user as any)?.tenantId; // 👈 التعديل الجراحي
+
+  if (!tenantId)
     return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
 
   try {
@@ -18,7 +20,7 @@ export async function GET(
     const product = await prisma.productInventory.findFirst({
       where: {
         id: id,
-        tenantId: session.user.tenantId,
+        tenantId: tenantId, // 👈 التعديل الجراحي
       },
     });
 
@@ -38,7 +40,9 @@ export async function PUT(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
-  if (!session?.user?.tenantId)
+  const tenantId = (session?.user as any)?.tenantId; // 👈 التعديل الجراحي
+
+  if (!tenantId)
     return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
 
   try {
@@ -62,7 +66,7 @@ export async function PUT(
     const existingProduct = await prisma.productInventory.findFirst({
       where: {
         id: id,
-        tenantId: session.user.tenantId,
+        tenantId: tenantId, // 👈 التعديل الجراحي
       },
     });
 
@@ -101,7 +105,9 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const session = await auth();
-  if (!session?.user?.tenantId)
+  const tenantId = (session?.user as any)?.tenantId; // 👈 التعديل الجراحي
+
+  if (!tenantId)
     return NextResponse.json({ error: "غير مصرح" }, { status: 401 });
 
   try {
@@ -112,7 +118,7 @@ export async function DELETE(
     const existingProduct = await prisma.productInventory.findFirst({
       where: {
         id: id,
-        tenantId: session.user.tenantId,
+        tenantId: tenantId, // 👈 التعديل الجراحي
       },
     });
 
